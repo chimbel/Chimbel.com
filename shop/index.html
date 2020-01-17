@@ -3,8 +3,6 @@
 <head>
 	<!-- Mobile Specific Meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<!-- Favicon-->
-	<link rel="shortcut icon" href="img/fav.png">
 	<!-- Author Meta -->
 	<meta name="author" content="CodePixar">
 	<!-- Meta Description -->
@@ -127,21 +125,19 @@
     document.getElementById("domain-header").innerHTML = qsplit[0];
     document.getElementById("domain-title").innerHTML = "Buy " + qsplit[0] + " now!";
     document.getElementById("domain-buy").href = "https://dan.com/orders/checkout/" + qsplit[0].toLowerCase(); + "?utm_campaign=BuyNow&utm_medium=cta&utm_source=dan.com";
-    console.log(qsplit[0])
-    console.log(qsplit[1])
-    console.log(qsplit[2])
+
 
     if (qsplit.length === 3 && qsplit[2] == 'u'){
 		// trigger async function
 		// log response or catch error of fetch promise
-		fetchAsync('https://boreda6d.herokuapp.com/' + qsplit[1] + '/bad')
+		fetchAsync('https://bored7a6d.herokuapp.com/' + qsplit[1] + '/bad')
 			.then(data => alert("You have been removed from our mailing list"))
 			.catch(reason => alert("Our service is down! Please try again later!"))
 	} else {
 		// trigger async function
 		// log response or catch error of fetch promise
 		fetchAsync('https://bored7a6d.herokuapp.com/' + qsplit[1] + '/visited')
-			.then(data => console.log(data))
+			.then(data => console.log())
 			.catch(reason => console.log(reason.message))
 	}
 
