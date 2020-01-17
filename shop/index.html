@@ -56,8 +56,11 @@
 										..using Dan.com & Ayden for safe & secure escrow & payments!
 <br>
 									<br>
+
 								<div class="subscription">
-									<a id="domain-buy" href="#" class="primary-btn"><span>Buy Now*</span><span class="lnr lnr-arrow-right"></span></a>
+																		<a id="domain-buy" href="#" class="primary-btn"><span>Buy Now*</span><span class="lnr lnr-arrow-right"></span></a>
+									
+									<a id="domain-mo" href="#" class="primary-btn"><span>Make Offer</span><span class="lnr lnr-arrow-right"></span></a>
 									<br>
 									*You will be redirected to Dan.com
 								</div>
@@ -124,7 +127,8 @@
     var qsplit = query['q'].split("%%");
     document.getElementById("domain-header").innerHTML = qsplit[0];
     document.getElementById("domain-title").innerHTML = "Buy " + qsplit[0] + " now!";
-    document.getElementById("domain-buy").href = "https://dan.com/buy-domain/" + qsplit[0].toLowerCase(); + "?utm_campaign=BuyNow&utm_medium=cta&utm_source=dan.com";
+    document.getElementById("domain-buy").href = "https://dan.com/orders/checkout/" + qsplit[0].toLowerCase(); + "?utm_campaign=BuyNow&utm_medium=cta&utm_source=dan.com";
+    document.getElementById("domain-mo").href = "https://dan.com/buy-domain/" + qsplit[0].toLowerCase(); + "?utm_campaign=BuyNow&utm_medium=cta&utm_source=dan.com";
 
 
     if (qsplit.length === 3 && qsplit[2] == 'u'){
