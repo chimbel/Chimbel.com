@@ -2404,8 +2404,6 @@ nav a:hover {
   }
   .subscription .primary-btn {
     top: 120%;
-    transform: translate(50%, 0);
-    right: 50%;
     width: 170px;
   }
   .subscription .info {
