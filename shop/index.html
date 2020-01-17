@@ -112,6 +112,16 @@
         });
         return vars;
     }
+
+    async function fetchAsync (url) {
+		  // await response of fetch call
+		  let response = await fetch(url);
+		  // only proceed once promise is resolved
+		  let data = await response.json();
+		  // only proceed once second promise is resolved
+		  return data;
+		}
+
     var query = getUrlVars();
     var qsplit = query['q'].split("%%");
     document.getElementById("domain-header").innerHTML = qsplit[0];
@@ -122,41 +132,19 @@
     console.log(qsplit[2])
 
     if (qsplit.length === 3 && qsplit[2] == 'u'){
-    	async function fetchAsync () {
-		  // await response of fetch call
-		  let response = await fetch('https://bored7a6d.herokuapp.com/' + qsplit[1] + '/bad');
-		  // only proceed once promise is resolved
-		  let data = await response.json();
-		  // only proceed once second promise is resolved
-		  return data;
-		}
-
 		// trigger async function
 		// log response or catch error of fetch promise
-		fetchAsync()
-			.then(data => console.log(data))
+		fetchAsync('https://boreda6d.herokuapp.com/' + qsplit[1] + '/bad')
+			.then(data => alert("You have been removed from our mailing list"))
 			.catch(reason => console.log(reason.message))
-
-    	alert("You have been removed from our mailing list")
 
 	} else {
 
-		async function fetchAsync () {
-		  // await response of fetch call
-		  let response = await fetch('https://bored7a6d.herokuapp.com/' + qsplit[1] + '/visited');
-		  // only proceed once promise is resolved
-		  let data = await response.json();
-		  // only proceed once second promise is resolved
-		  return data;
-		}
-
 		// trigger async function
 		// log response or catch error of fetch promise
-		fetchAsync()
+		fetchAsync('https://bored7a6d.herokuapp.com/' + qsplit[1] + '/visited')
 			.then(data => console.log(data))
 			.catch(reason => console.log(reason.message))
-
-
 	}
 
 
