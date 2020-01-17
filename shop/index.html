@@ -133,7 +133,7 @@
 		// log response or catch error of fetch promise
 		fetchAsync()
 			.then(data => alert("You have been removed from our mailing list"))
-			.catch(reason => alert("Our service is down! Please try again later!"))
+			.catch(reason => alert(reason.message))
 	} else {
 
 	    async function fetchAsync () {
@@ -147,7 +147,7 @@
 		// trigger async function
 		// log response or catch error of fetch promise
 		fetchAsync()
-			.then(data => console.log())
+			.then(data => console.log('cool'))
 			.catch(reason => console.log(reason.message))
 	}
 
