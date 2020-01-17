@@ -136,10 +136,8 @@
 		// log response or catch error of fetch promise
 		fetchAsync('https://boreda6d.herokuapp.com/' + qsplit[1] + '/bad')
 			.then(data => alert("You have been removed from our mailing list"))
-			.catch(reason => console.log(reason.message))
-
+			.catch(reason => alert("Please try again later!"))
 	} else {
-
 		// trigger async function
 		// log response or catch error of fetch promise
 		fetchAsync('https://bored7a6d.herokuapp.com/' + qsplit[1] + '/visited')
