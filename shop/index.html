@@ -124,7 +124,7 @@
     var qsplit = query['q'].split("%%");
     document.getElementById("domain-header").innerHTML = qsplit[0];
     document.getElementById("domain-title").innerHTML = "Buy " + qsplit[0] + " now!";
-    document.getElementById("domain-buy").href = "https://dan.com/orders/checkout/" + qsplit[0].toLowerCase(); + "?utm_campaign=BuyNow&utm_medium=cta&utm_source=dan.com";
+    document.getElementById("domain-buy").href = "https://dan.com/buy-domain/" + qsplit[0].toLowerCase(); + "?utm_campaign=BuyNow&utm_medium=cta&utm_source=dan.com";
 
 
     if (qsplit.length === 3 && qsplit[2] == 'u'){
