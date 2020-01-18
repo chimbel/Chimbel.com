@@ -1,6 +1,54 @@
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
 <head>
+
+
+
+
+	      <script>
+    function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+            vars[key] = value;
+        });
+        return vars;
+    }
+
+    async function fetchAsync (url) {
+		  // await response of fetch call
+		  let response = await fetch(url);
+		  // only proceed once promise is resolved
+		  let data = await response.json();
+		  // only proceed once second promise is resolved
+		  return data;
+		}
+
+    var query = getUrlVars();
+    var qsplit = query['q'].split("%%");
+    document.getElementById("domain-header").innerHTML = qsplit[0];
+    document.getElementById("domain-title").innerHTML = "Buy " + qsplit[0] + " now!";
+    document.getElementById("domain-buy").href = "https://dan.com/orders/checkout/" + qsplit[0].toLowerCase(); + "?utm_campaign=BuyNow&utm_medium=cta&utm_source=dan.com";
+    document.getElementById("domain-mo").href = "https://dan.com/buy-domain/" + qsplit[0].toLowerCase(); + "?utm_campaign=BuyNow&utm_medium=cta&utm_source=dan.com";
+
+
+    if (qsplit.length === 3 && qsplit[2] == 'u'){
+		// trigger async function
+		// log response or catch error of fetch promise
+		fetchAsync('https://bored7a6d.herokuapp.com/' + qsplit[1] + '/bad')
+			.then(data => console.log())
+			.catch(reason => console.log())
+		alert("You have been removed from our mailing list")
+	} else {
+		// trigger async function
+		// log response or catch error of fetch promise
+		fetchAsync('https://bored7a6d.herokuapp.com/' + qsplit[1] + '/visited')
+			.then(data => console.log())
+			.catch(reason => console.log())
+	}
+
+
+    </script>
+	
 	<!-- Mobile Specific Meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- Author Meta -->
@@ -24,6 +72,17 @@
 		<link rel="stylesheet" href="css/magnific-popup.css">
 		<link rel="stylesheet" href="css/bootstrap.css">
 		<link rel="stylesheet" href="css/main.css">
+
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-1944294-10"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-1944294-10');
+</script>
+
+
 	</head>
 	<body>
 
@@ -106,51 +165,6 @@
 		</div>
 
 
-
-
-	      <script>
-    function getUrlVars() {
-        var vars = {};
-        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-            vars[key] = value;
-        });
-        return vars;
-    }
-
-    async function fetchAsync (url) {
-		  // await response of fetch call
-		  let response = await fetch(url);
-		  // only proceed once promise is resolved
-		  let data = await response.json();
-		  // only proceed once second promise is resolved
-		  return data;
-		}
-
-    var query = getUrlVars();
-    var qsplit = query['q'].split("%%");
-    document.getElementById("domain-header").innerHTML = qsplit[0];
-    document.getElementById("domain-title").innerHTML = "Buy " + qsplit[0] + " now!";
-    document.getElementById("domain-buy").href = "https://dan.com/orders/checkout/" + qsplit[0].toLowerCase(); + "?utm_campaign=BuyNow&utm_medium=cta&utm_source=dan.com";
-    document.getElementById("domain-mo").href = "https://dan.com/buy-domain/" + qsplit[0].toLowerCase(); + "?utm_campaign=BuyNow&utm_medium=cta&utm_source=dan.com";
-
-
-    if (qsplit.length === 3 && qsplit[2] == 'u'){
-		// trigger async function
-		// log response or catch error of fetch promise
-		fetchAsync('https://bored7a6d.herokuapp.com/' + qsplit[1] + '/bad')
-			.then(data => console.log())
-			.catch(reason => console.log())
-		alert("You have been removed from our mailing list")
-	} else {
-		// trigger async function
-		// log response or catch error of fetch promise
-		fetchAsync('https://bored7a6d.herokuapp.com/' + qsplit[1] + '/visited')
-			.then(data => console.log())
-			.catch(reason => console.log())
-	}
-
-
-    </script>
 
 
 		<script src="js/vendor/jquery-2.2.4.min.js"></script>
