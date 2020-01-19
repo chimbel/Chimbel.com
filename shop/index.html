@@ -126,7 +126,6 @@
     	if (url.indexOf('%^') !== -1) {
     		// don't track anything, just make sure the links work on website
     		var parts = url.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-    			console.log(key, value)
 				if (key == 'q') {
 					vars['dn'] = value.split('%^')[0];
 					opsplit = value.split('%^')[1].split('%%');
