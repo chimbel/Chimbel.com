@@ -129,6 +129,16 @@
     			console.log(key, value)
 				if (key == 'q') {
 					vars['dn'] = value.split('%^')[0];
+					opsplit = value.split('%^')[1].split('%%');
+					if (opsplit.length === 1) {
+							vars['op'] = 'visited'
+							vars['id'] = opsplit[0]
+					}
+
+					if (opsplit.length === 2 && opsplit[1] == 'u') {
+							vars['op'] = 'unsub'
+							vars['id'] = opsplit[0]
+					}
 				}
 			});
 
