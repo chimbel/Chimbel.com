@@ -197,9 +197,7 @@
 	  return data;
 	}
 
-	var redirect = true;
 	if(params.hasOwnProperty('dn') && params['dn'].indexOf('.com') !== -1) {
-		redirect = false
 		document.getElementById("domain-header").innerHTML = params['dn'];
 		document.getElementById("domain-title").innerHTML = "Buy " + params['dn'] + " now!";
 		document.getElementById("domain-buy").href = "https://dan.com/orders/checkout/" + params['dn'].toLowerCase(); + "?utm_campaign=BuyNow&utm_medium=cta&utm_source=dan.com";
@@ -217,11 +215,6 @@
 			}
 		}
 	}
-
-	if (redirect) {
-		window.location.replace("http://www.chimbel.com");
-	}
-
 
     </script>
 
