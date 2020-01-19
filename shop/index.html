@@ -137,27 +137,39 @@
 		  return data;
 		}
 
-    var query = getUrlVars();
-    var qsplit = query['q'].split("%%");
-    document.getElementById("domain-header").innerHTML = qsplit[0];
-    document.getElementById("domain-title").innerHTML = "Buy " + qsplit[0] + " now!";
-    document.getElementById("domain-buy").href = "https://dan.com/orders/checkout/" + qsplit[0].toLowerCase(); + "?utm_campaign=BuyNow&utm_medium=cta&utm_source=dan.com";
-    document.getElementById("domain-mo").href = "https://dan.com/buy-domain/" + qsplit[0].toLowerCase(); + "?utm_campaign=BuyNow&utm_medium=cta&utm_source=dan.com";
+
+	var query = getUrlVars();
+	if(query.hasOwnProperty('q')) {
+
+		var qsplit = query['q'].split("%%");
+		console.log(qsplit[1].length === 24)
+		console.log(qsplit[0].indexOf('.com'))
+		if (qsplit[1].length === 24 && qsplit[0].indexOf('.com') !== -1) {
+			document.getElementById("domain-header").innerHTML = qsplit[0];
+			document.getElementById("domain-title").innerHTML = "Buy " + qsplit[0] + " now!";
+			document.getElementById("domain-buy").href = "https://dan.com/orders/checkout/" + qsplit[0].toLowerCase(); + "?utm_campaign=BuyNow&utm_medium=cta&utm_source=dan.com";
+			document.getElementById("domain-mo").href = "https://dan.com/buy-domain/" + qsplit[0].toLowerCase(); + "?utm_campaign=BuyNow&utm_medium=cta&utm_source=dan.com";
 
 
-    if (qsplit.length === 3 && qsplit[2] == 'u'){
-		// trigger async function
-		// log response or catch error of fetch promise
-		fetchAsync('https://bored7a6d.herokuapp.com/' + qsplit[1] + '/unsub')
-			.then(data => console.log())
-			.catch(reason => console.log())
-		alert("You have been removed from our mailing list")
+			if (qsplit.length === 3 && qsplit[2] == 'u'){
+				// trigger async function
+				// log response or catch error of fetch promise
+				fetchAsync('https://bored7a6d.herokuapp.com/' + qsplit[1] + '/unsub')
+					.then(data => console.log())
+					.catch(reason => console.log())
+				alert("You have been removed from our mailing list")
+			} else {
+				// trigger async function
+				// log response or catch error of fetch promise
+				fetchAsync('https://bored7a6d.herokuapp.com/' + qsplit[1] + '/visited')
+					.then(data => console.log())
+					.catch(reason => console.log())
+			}
+		} else {
+			window.location.replace("http://www.chimbel.com");
+		}
 	} else {
-		// trigger async function
-		// log response or catch error of fetch promise
-		fetchAsync('https://bored7a6d.herokuapp.com/' + qsplit[1] + '/visited')
-			.then(data => console.log())
-			.catch(reason => console.log())
+			window.location.replace("http://www.chimbel.com");
 	}
 
 
