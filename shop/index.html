@@ -120,52 +120,90 @@
 
 
   <script>
-    function getUrlVars() {
-        var vars = {};
-        var parts = decodeURIComponent(encodeURIComponent(window.location.href)).replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-            vars[key] = value;
-        });
-        return vars;
-    }
+    function getParams() {
+		var vars = {};
+		url = decodeURIComponent(encodeURIComponent(window.location.href));
+    	if (url.indexOf('%^') !== -1) {
+    		// don't track anything, just make sure the links work on website
+    		var parts = url.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+    			console.log(key, value)
+				if (key == 'q') {
+					vars['dn'] = value.split('%^')[0];
+				}
+			});
 
-    async function fetchAsync (url) {
-		  // await response of fetch call
-		  let response = await fetch(url);
-		  // only proceed once promise is resolved
-		  let data = await response.json();
-		  // only proceed once second promise is resolved
-		  return data;
+    	} else if (url.indexOf('%%') !== -1) {
+
+			var parts = url.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+				if (key == 'q') {
+					qsplit = value.split('%%')
+					if (qsplit.length === 3 && qsplit[2] == 'u')
+					{
+							vars['dn'] = qsplit[0]
+							vars['op'] = 'unsub'
+							vars['id'] = qsplit[1]
+
+					}
+
+					if (qsplit.length === 2) {
+							vars['dn'] = qsplit[0]
+							vars['op'] = 'visited'
+							vars['id'] = qsplit[1]
+					}
+				}
+			});
+    	} else {
+
+			var parts = url.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+				if (key == 'q') {
+					vars['dn'] = value;
+				}
+
+				if (key == 'v') {
+					vars['id'] = value;
+					vars['op'] = 'visited';
+				}
+
+				if (key == 'u') {
+					vars['id'] = value;
+					vars['op'] = 'unsub';
+				}
+
+			});
 		}
 
+        return vars;
+    }
+	var params = getParams();
+	console.log(params)
 
-	var query = getUrlVars();
+	async function fetchAsync (url) {
+	  // await response of fetch call
+	  let response = await fetch(url);
+	  // only proceed once promise is resolved
+	  let data = await response.json();
+	  // only proceed once second promise is resolved
+	  return data;
+	}
+
+
 	var redirect = true;
-	if(query.hasOwnProperty('q')) {
+	if(params.hasOwnProperty('dn')) {
+		redirect = false
+		document.getElementById("domain-header").innerHTML = params['dn'];
+		document.getElementById("domain-title").innerHTML = "Buy " + params['dn'] + " now!";
+		document.getElementById("domain-buy").href = "https://dan.com/orders/checkout/" + params['dn'].toLowerCase(); + "?utm_campaign=BuyNow&utm_medium=cta&utm_source=dan.com";
+		document.getElementById("domain-mo").href = "https://dan.com/buy-domain/" + params['dn'].toLowerCase(); + "?utm_campaign=BuyNow&utm_medium=cta&utm_source=dan.com";
 
-		var qsplit = query['q'].split("%%");
-		if (qsplit.length > 1) {
-			console.log(qsplit)
-			if (qsplit[0].indexOf('.com') !== -1 && qsplit[1].length === 24) {
-				redirect = false
-				document.getElementById("domain-header").innerHTML = qsplit[0];
-				document.getElementById("domain-title").innerHTML = "Buy " + qsplit[0] + " now!";
-				document.getElementById("domain-buy").href = "https://dan.com/orders/checkout/" + qsplit[0].toLowerCase(); + "?utm_campaign=BuyNow&utm_medium=cta&utm_source=dan.com";
-				document.getElementById("domain-mo").href = "https://dan.com/buy-domain/" + qsplit[0].toLowerCase(); + "?utm_campaign=BuyNow&utm_medium=cta&utm_source=dan.com";
+		if (params.hasOwnProperty('id') && params.hasOwnProperty('op')) {
+			// trigger async function
+			// log response or catch error of fetch promise
+			fetchAsync('https://bored7a6d.herokuapp.com/' + params['id'] + '/' + params['op'])
+				.then(data => console.log())
+				.catch(reason => console.log())
 
-				if (qsplit.length === 3 && qsplit[2] == 'u'){
-					// trigger async function
-					// log response or catch error of fetch promise
-					fetchAsync('https://bored7a6d.herokuapp.com/' + qsplit[1] + '/unsub')
-						.then(data => console.log())
-						.catch(reason => console.log())
-					alert("You have been removed from our mailing list")
-				} else {
-					// trigger async function
-					// log response or catch error of fetch promise
-					fetchAsync('https://bored7a6d.herokuapp.com/' + qsplit[1] + '/visited')
-						.then(data => console.log())
-						.catch(reason => console.log())
-				}
+			if (params['op'] == 'unsub') {
+				alert("You have been removed from our mailing list")
 			}
 		}
 	}
