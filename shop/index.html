@@ -143,10 +143,6 @@
 	if(query.hasOwnProperty('q')) {
 
 		var qsplit = query['q'].split("%%");
-		if (qsplit.length === 0) {
-			var qsplit = query['q'].split("%25%25");
-		}
-		
 		if (qsplit.length > 1) {
 			console.log(qsplit)
 			if (qsplit[0].indexOf('.com') !== -1 && qsplit[1].length === 24) {
