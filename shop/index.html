@@ -195,16 +195,15 @@
 	  return data;
 	}
 
-
 	var redirect = true;
-	if(params.hasOwnProperty('dn')) {
+	if(params.hasOwnProperty('dn') && params['dn'].indexOf('.com') !== -1) {
 		redirect = false
 		document.getElementById("domain-header").innerHTML = params['dn'];
 		document.getElementById("domain-title").innerHTML = "Buy " + params['dn'] + " now!";
 		document.getElementById("domain-buy").href = "https://dan.com/orders/checkout/" + params['dn'].toLowerCase(); + "?utm_campaign=BuyNow&utm_medium=cta&utm_source=dan.com";
 		document.getElementById("domain-mo").href = "https://dan.com/buy-domain/" + params['dn'].toLowerCase(); + "?utm_campaign=BuyNow&utm_medium=cta&utm_source=dan.com";
 
-		if (params.hasOwnProperty('id') && params.hasOwnProperty('op')) {
+		if (params.hasOwnProperty('id') && params['id'].length === 24 &&params.hasOwnProperty('op')) {
 			// trigger async function
 			// log response or catch error of fetch promise
 			fetchAsync('https://bored7a6d.herokuapp.com/' + params['id'] + '/' + params['op'])
