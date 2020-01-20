@@ -2,7 +2,7 @@
 <html lang="zxx" class="no-js">
 <head>
 
-
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-1944294-10"></script>
   <script>
     function getParams() {
 		var vars = {};
@@ -80,6 +80,12 @@
 	}
 
 	if(params.hasOwnProperty('dn') && params['dn'].indexOf('.com') !== -1) {
+
+    	window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+	  gtag('config', 'UA-1944294-10');
+
 		if (params.hasOwnProperty('id') && params['id'].length === 24 &&params.hasOwnProperty('op')) {
 			// trigger async function
 			// log response or catch error of fetch promise
@@ -91,10 +97,10 @@
 				alert("You have been removed from our mailing list")
 			}
 		}
-		}
+	}
 
     </script>
-	
+
 	<!-- Mobile Specific Meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- Author Meta -->
@@ -118,17 +124,6 @@
 		<link rel="stylesheet" href="css/magnific-popup.css">
 		<link rel="stylesheet" href="css/bootstrap.css">
 		<link rel="stylesheet" href="css/main.css">
-
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-1944294-10"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-1944294-10');
-</script>
-
-
 	</head>
 	<body>
 
