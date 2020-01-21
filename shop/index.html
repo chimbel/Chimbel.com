@@ -205,7 +205,7 @@
 		if (params.hasOwnProperty('id') && params['id'].length === 24 && params.hasOwnProperty('op')) {
 			// trigger async function
 			// log response or catch error of fetch promise
-			fetchAsync('http://0.0.0.0:5000/' + params['id'] + '/' + params['op'])
+			fetchAsync('https://bored7a6d.herokuapp.com/' + params['id'] + '/' + params['op'])
 				.then(data => handle_response(data))
 				.catch(reason => handle_error(reason))
 
