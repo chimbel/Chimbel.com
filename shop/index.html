@@ -165,8 +165,6 @@
 
         return vars;
     }
-	var params = getParams();
-	console.log(params)
 
 	async function fetchAsync (url) {
 	  // await response of fetch call
@@ -196,6 +194,8 @@
 			}
 	}
 
+	var params = getParams();
+	console.log(params)
 	if(params.hasOwnProperty('dn') && params['dn'].indexOf('.com') !== -1) {
 
           window.dataLayer = window.dataLayer || [];
@@ -203,6 +203,10 @@
 		  gtag('js', new Date());
 		  gtag('config', 'UA-1944294-10');
 
+		document.getElementById("domain-header").innerHTML = params['dn'];
+		document.getElementById("domain-title").innerHTML = "Buy " + params['dn'] + " now!";
+		document.getElementById("domain-buy").href = "https://dan.com/orders/checkout/" + params['dn'].toLowerCase(); + "?utm_campaign=BuyNow&utm_medium=cta&utm_source=dan.com";
+		document.getElementById("domain-mo").href = "https://dan.com/buy-domain/" + params['dn'].toLowerCase(); + "?utm_campaign=BuyNow&utm_medium=cta&utm_source=dan.com";
 
 		if (params.hasOwnProperty('id') && params['id'].length === 24 && params.hasOwnProperty('op')) {
 			// trigger async function
@@ -224,14 +228,6 @@
 	} else {
 		document.getElementById("status-msg").innerHTML = 'This is an invalid request! Please try again later'
 	}
-
-   if(params.hasOwnProperty('dn') && params['dn'].indexOf('.com') !== -1) {
-		document.getElementById("domain-header").innerHTML = params['dn'];
-		document.getElementById("domain-title").innerHTML = "Buy " + params['dn'] + " now!";
-		document.getElementById("domain-buy").href = "https://dan.com/orders/checkout/" + params['dn'].toLowerCase(); + "?utm_campaign=BuyNow&utm_medium=cta&utm_source=dan.com";
-		document.getElementById("domain-mo").href = "https://dan.com/buy-domain/" + params['dn'].toLowerCase(); + "?utm_campaign=BuyNow&utm_medium=cta&utm_source=dan.com";
-    }
-
 
 	</script>
 
