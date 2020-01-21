@@ -179,7 +179,7 @@
 
 	function handle_error(err) {
 			console.log(err);
-			alert('Our server is down! Try again later')
+			document.getElementById("status-msg").innerHTML = 'Our server is down at the moment! Please try again later'
 	}
 
 	function handle_response(response) {
