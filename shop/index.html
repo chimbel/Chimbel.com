@@ -98,11 +98,6 @@
 	console.log(params)
 	if(params.hasOwnProperty('dn') && params['dn'].indexOf('.com') !== -1) {
 
-          window.dataLayer = window.dataLayer || [];
-		  function gtag(){dataLayer.push(arguments);}
-		  gtag('js', new Date());
-		  gtag('config', 'UA-1944294-10');
-
 		if (params.hasOwnProperty('id') && params['id'].length === 24 && params.hasOwnProperty('op')) {
 
 
