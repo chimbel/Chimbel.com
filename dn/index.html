@@ -25,7 +25,6 @@
 	<body>
 		<div class="main-wrapper-first relative">
 
-			<section class="subscription-area">
 				<div class="container">
 
 
@@ -33,50 +32,47 @@
 						Howdy! Please wait while we process your request...
 					</div>
 
-					<div id="contact" class="row justify-content-center" style="display:none">
 
+				</div>
 
+		<section class="story-area" id="contact" style="display:none">
+			<div class="container">
+				<div class="row align-items-center">
+					<div class="col-lg-5">
+						<div class="story-content text-center">
+							<h3 class="text-white" id="domain-title"></h3>
 
-					<div class="col-md-5">
-
-						<div class="single-blog text-center">
-
-								<h3 id="domain-title"></h3>
-					<br>
-
-
-					  <h2>
 					  <del>
-						<span id="price-full" class="amount">$100</span>
+						<span style="font-size: 2em; font-weight: 200;">$100</span>
 					  </del>
-					  <ins>
-						<span id="price-off" class="amount">$69</span>
-					  </ins>
-					</h2>
-						<a id="cta-link" class="btn" style="background-color: #955bf9; border-color: #955bf9; color:white">
-							<span id="cta-text">Buy Now**</span> <span class="lnr lnr-cart"></span>
-						</a>
-
+						<span  style="font-size: 2em; font-weight: 400;" class="text-white">$69</span>
+<p>
+							<a id="cta-link" href="#" class="genric-btn primary circle arrow"><span class="lnr lnr-cart"></span>
+								<span id="cta-text">Buy Now</span>*
+							<span class="lnr lnr-arrow-right"></span></a>
+</p>
+						</div>
 					</div>
+					<div class="col-lg-7">
+						<div class="story-content" style="color:#fff">
+							<ul class="unordered-list">
+										<li>*You will be redirected to DAN.com to buy this domain, DAN.com
+								<ul>
+										<li>is a domain escrow service for secure transactions</li>
+										<li>accepts global payments & has a passionate support team</li>
+
+
+							</ul>
+								</li>
+								<li>Our domain delivery time is 12 - 48 hours after payment confirmation</li>
+							</ul>
+
 						</div>
-
-
-					<div class="col-md-7">
-
-						<div class="single-blog">
-									<ul class="unordered-list">
-										<li>We sell domains using <img class="img-fluid" src="../img/dan.png"> domain escrow to ensure a safe buying experience.</li>
-										<li>Our domain delivery time on average is 12-36 hours after payment has been confirmed</li>
-										<li>To know more about the process we follow, <a href="../transact.html" target="_blank">read our detailed domain escrow overview</a></li>
-										<li>Our preferred domain escrow service, DAN.com has a <a class="color:green" href="https://www.trustpilot.com/review/dan.com" target="_blank">4.5 out of 5 Trustpilot.com rating</a></li>
-									</ul>
-						</div>
-
+					</div>
 
 				</div>
-				</div>
-				</div>
-			</section>
+			</div>
+		</section>
 
 
 			<section class="subscription-area">
@@ -85,7 +81,7 @@
 						<div class="col-lg-8">
 
 							<div class="section-title text-center">
-								<p class="mb-0 mt-10">Search from 1M+ premium domain names... </p>
+								<p class="mb-0 mt-10"><b>Search from 1M+ premium domain names... </b></p>
 							</div>
 						</div>
 
@@ -151,7 +147,9 @@
 	}
 
 	function handle_error(err) {
+			console.log(err)
 			document.getElementById("status-msg").innerHTML = 'Our server is down at the moment! Please try again later.'
+			document.getElementById("status-msg").className = 'alert alert-danger'
 	}
 
 	function handle_response(response) {
