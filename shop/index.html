@@ -1,118 +1,18 @@
-<!DOCTYPE html>
-<head>
-  <script>
-    function getParams() {
-		var vars = {};
-		url = decodeURIComponent(encodeURIComponent(window.location.href));
-    	if (url.indexOf('%^') !== -1) {
-    		// don't track anything, just make sure the links work on website
-    		var parts = url.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-				if (key == 'q') {
-					vars['dn'] = value.split('%^')[0];
-					opsplit = value.split('%^')[1].split('%%');
-					if (opsplit.length === 1) {
-							vars['op'] = 'visited'
-							vars['id'] =  '5e' + opsplit[0]
-					}
-
-					if (opsplit.length === 2 && opsplit[1] == 'u') {
-							vars['op'] = 'unsub'
-							vars['id'] = '5e'+ opsplit[0]
-					}
-				}
-			});
-
-    	} else if (url.indexOf('%%') !== -1) {
-
-			var parts = url.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-				if (key == 'q') {
-					qsplit = value.split('%%')
-					if (qsplit.length === 3 && qsplit[2] == 'u')
-					{
-							vars['dn'] = qsplit[0]
-							vars['op'] = 'unsub'
-							vars['id'] = qsplit[1]
-
-					}
-
-					if (qsplit.length === 2) {
-							vars['dn'] = qsplit[0]
-							vars['op'] = 'visited'
-							vars['id'] = qsplit[1]
-					}
-				}
-			});
-    	} else {
-
-			var parts = url.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-				if (key == 'q') {
-					vars['dn'] = value;
-				}
-
-				if (key == 'v') {
-					vars['id'] = value;
-					vars['op'] = 'visited';
-				}
-
-				if (key == 'u') {
-					vars['id'] = value;
-					vars['op'] = 'unsub';
-				}
-
-			});
-		}
-
-        return vars;
-    }
-
-	async function fetchAsync (url) {
-	  // await response of fetch call
-	  let response = await fetch(url);
-	  // only proceed once promise is resolved
-	  let data = await response.json();
-	  // only proceed once second promise is resolved
-	  return data;
-	}
-
-	function handle_error(err) {
-			console.log(err);
-			document.getElementById("status-msg").innerHTML = 'Our server is down at the moment! Please try again later'
-	}
-
-	function handle_response(response) {
-			console.log(response);
-
-			if(response.hasOwnProperty('alert')) {
-				document.getElementById("status-msg").innerHTML = response['alert']
-			}
-
-			if(response.hasOwnProperty('redirect')) {
-				setTimeout(function() {
-					window.location.href = response['redirect'];
-				 }, 15000);
-			}
-	}
-
-	var params = getParams();
-
-	console.log(params)
-	if(params.hasOwnProperty('dn') && params['dn'].indexOf('.com') !== -1) {
-
-		if (params.hasOwnProperty('id') && params['id'].length === 24 && params.hasOwnProperty('op')) {
-
-
-			if (params.hasOwnProperty('op') && params['op'] === 'unsub') {
-   			     window.location.href = 'https://go.chimbel.com/u?q=' + params['id']
-			}
-			if (params.hasOwnProperty('op') && params['op'] === 'visited') {
-				 window.location.href = 'https://go.chimbel.com/shop?q=' + params['id']
-			}
-		}
-	}
-
-	</script>
-	</head>
-
+<html>
+  <head>
+	    <script>
+  function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,
+    function(m,key,value) {
+      vars[key] = value;
+    });
+    return vars;
+  }
+   var params = getUrlVars();
+   window.location.href = window.location.href.replace('/shop/','/dn/');
+  </script>
+  </head>
 	<body>
 	You are being redirected...
 	</body>
